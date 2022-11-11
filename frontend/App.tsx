@@ -16,7 +16,6 @@ const client = new ApolloClient({
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
-
 export default function App() {
   return (
     <ApolloProvider client={client}>
