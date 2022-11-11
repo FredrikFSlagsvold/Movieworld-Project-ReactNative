@@ -6,7 +6,8 @@ import { NavigationContainer } from "@react-navigation/native";
 import { RootStackParamList } from "./types";
 import DummyPage from "./page/DummyPage";
 import DisplayMovie from "./components/DisplayMovie";
-import Movies from "./page/Movies";
+import Login from "./components/Login";
+import CreateUser from "./components/CreateUser";
 
 const client = new ApolloClient({
   uri: "http://it2810-20.idi.ntnu.no:3001/movie",
@@ -19,10 +20,14 @@ export default function App() {
   return (
     <ApolloProvider client={client}>
       <NavigationContainer>
-        <Stack.Navigator initialRouteName="HomePage">
-          <Stack.Screen name="HomePage" component={HomePage} />
+        <Stack.Navigator initialRouteName="Login">
+          <Stack.Screen name="DummyPage" component={DummyPage} />
 
           <Stack.Screen name="DummyPage" component={DummyPage} />
+
+          <Stack.Screen name="Login" component={Login} />
+
+          <Stack.Screen name="CreateUser" component={CreateUser} />
 
           <Stack.Screen name="DisplayMovie" component={DisplayMovie} />
         </Stack.Navigator>

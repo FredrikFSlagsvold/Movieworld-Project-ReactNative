@@ -10,6 +10,10 @@ import {
   Button,
   TouchableOpacity,
 } from "react-native";
+import type { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { RootStackParamList } from '../types';
+
+type CreateUserProps = NativeStackScreenProps<RootStackParamList, 'CreateUser'>
 
 type UserProps= {
   firstName: String
@@ -18,7 +22,7 @@ type UserProps= {
   userName: String
 }
 
-export default function CreateUser() {
+export default function CreateUser({ navigation } : CreateUserProps) {
     const[firstName, setFirstName] = useState("")
     const[lastName, setLastName] = useState("")
     const[password, setPassword] = useState("")
@@ -70,10 +74,10 @@ export default function CreateUser() {
               onChangeText={(password) => setPassword(password)}
             />
             </View>
-          <TouchableOpacity disabled={userName === "" || password === "" || firstName === "" || lastName === "" || data?.userByUserName.length !== 0} onPress={()=> signup()} style={styles.loginBtn}>
+          <TouchableOpacity disabled={userName === "" || password === "" || firstName === "" || lastName === "" || data?.userByUserName.length !== 0} onPress={()=> {signup();navigation.replace('Login')}} style={styles.loginBtn}>
             <Text style={styles.TextInputBtn}>Register new user</Text>
           </TouchableOpacity>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={() => navigation.replace('Login')}>
             <Text style={styles.forgot_button}>Already have an account? Go to login page</Text>
           </TouchableOpacity>
         </View>

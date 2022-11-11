@@ -5,18 +5,19 @@ import {
   StyleSheet,
   Text,
   View,
-  Image,
   TextInput,
-  Button,
   TouchableOpacity,
 } from "react-native";
 import { LOGIN_MUTATION } from "../utils/Queries";
+import type { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { RootStackParamList } from '../types';
 
-const Login = ()  => {
+type LoginProps = NativeStackScreenProps<RootStackParamList, 'Login'>
+
+const Login = ({navigation} : LoginProps)  => {
     const [userName, setUserName] = useState('');
     const [password, setPassword] = useState(''); 
     const [isWrongUser, setIsWrongUser] = useState(false)
-    // const navigate = useNavigate();
 
   const {data} = useQuery(LOGIN_MUTATION, {
     variables: {
@@ -29,8 +30,7 @@ const Login = ()  => {
       if(data.login.length){
         AsyncStorage.setItem("isLoggedIn", "true")
         AsyncStorage.setItem("userID", data.login[0].id) 
-        // navigate("/");
-        // window.location.reload();
+        navigation.replace("HomePage");
       }else{
         AsyncStorage.setItem("isLoggedIn", "false")
         setIsWrongUser(true)
@@ -60,7 +60,7 @@ const Login = ()  => {
           <TouchableOpacity disabled={userName === "" || password === ""} onPress={checkUser} style={styles.loginBtn}>
             <Text style={styles.TextInputBtn}>Login</Text>
           </TouchableOpacity>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={() => navigation.replace('CreateUser')}>
             <Text style={styles.forgot_button}>Go to register page</Text>
           </TouchableOpacity>
         </View>
