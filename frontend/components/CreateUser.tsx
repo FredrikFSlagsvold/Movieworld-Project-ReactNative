@@ -74,10 +74,10 @@ export default function CreateUser({ navigation } : CreateUserProps) {
               onChangeText={(password) => setPassword(password)}
             />
             </View>
-          <TouchableOpacity disabled={userName === "" || password === "" || firstName === "" || lastName === "" || data?.userByUserName.length !== 0} onPress={()=> {signup();navigation.navigate('Login')}} style={styles.loginBtn}>
+          <TouchableOpacity disabled={userName === "" || password === "" || firstName === "" || lastName === "" || data?.userByUserName.length !== 0} onPress={()=> {signup();navigation.replace('Login')}} style={styles.loginBtn}>
             <Text style={styles.TextInputBtn}>Register new user</Text>
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => navigation.navigate('Login')}>
+          <TouchableOpacity onPress={() => navigation.replace('Login')}>
             <Text style={styles.forgot_button}>Already have an account? Go to login page</Text>
           </TouchableOpacity>
         </View>
