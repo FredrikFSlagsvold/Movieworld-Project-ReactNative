@@ -21,6 +21,8 @@ export default function HomePage( {navigation} : HomePageProps){
             onPress={() => navigation.navigate('DummyPage')
             }
             />
+
+
       </View>
     )
 }
