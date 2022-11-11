@@ -5,6 +5,8 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { NavigationContainer } from '@react-navigation/native';
 import { RootStackParamList } from './types';
 import DummyPage from './page/DummyPage';
+import Login from './components/Login';
+import CreateUser from './components/CreateUser';
 
 
 const client = new ApolloClient({
@@ -19,7 +21,7 @@ export default function App() {
   return (
     <ApolloProvider client={client}>
       <NavigationContainer>
-        <Stack.Navigator initialRouteName='HomePage'>
+        <Stack.Navigator initialRouteName='Login'>
 
           <Stack.Screen
           name='HomePage'
@@ -29,6 +31,16 @@ export default function App() {
           <Stack.Screen
           name='DummyPage'
           component={DummyPage}
+          />
+
+          <Stack.Screen
+          name='Login'
+          component={Login}
+          />
+
+          <Stack.Screen
+          name='CreateUser'
+          component={CreateUser}
           />
 
           </Stack.Navigator>
