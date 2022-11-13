@@ -63,6 +63,7 @@ export const GET_MOVIE = gql`
             original_language
             runtime
             genres
+            vote_average
             cast {
             name
             id
