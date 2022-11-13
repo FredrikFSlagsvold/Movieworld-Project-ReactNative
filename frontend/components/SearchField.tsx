@@ -11,6 +11,7 @@ import {
   } from "react-native";
 import { width } from "@mui/system";
 import { debounce } from "@mui/material";
+import { MOVIESPERPAGE } from "../page/Homepage";
   
 
 type SearchProps ={
@@ -98,7 +99,7 @@ export default function SearchField({setSearchFilter,
   });
 
   useEffect(()=>{
-    setNumberOfPages(Math.ceil(data?.moviesCountBySearch/12));
+    setNumberOfPages(Math.ceil(data?.moviesCountBySearch/MOVIESPERPAGE));
   },[data, setNumberOfPages])
 
 
