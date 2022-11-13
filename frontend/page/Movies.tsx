@@ -4,6 +4,7 @@ import { MovieFeed } from "../utils/Queries";
 import { StyleSheet, Text, ScrollView } from "react-native";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../types";
+import React from "react";
 
 type MovieProps = NativeStackScreenProps<RootStackParamList, "HomePage"> & {
   limit: number;
@@ -45,9 +46,6 @@ export default function Movies({
       sortType: sortType,
     },
   });
-
-  console.log("error", error);
-  console.log("data", data);
 
   if (loading) return <Text>Loading...</Text>;
   if (error) return <Text>Error...</Text>;
