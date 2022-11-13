@@ -29,15 +29,15 @@ export default function HomePage({ navigation, route }: HomePageProps) {
 
     return(
         <View style={styles.container}>
-            <Text>Movie World!</Text>
             <SearchField searchText={searchText} filter={searchFilter} setSearchFilter={setSearchFilter} setSearchText={setSearchText} setNumberOfPages={setNumberOfPages} setSortType={setSortType} setOffset={setOffset} sortType={sortType} setSort={setSort}/>
-
+     
             <Movies text={searchText} filter={searchFilter} sort={sort} sortType={sortType} navigation={navigation} route={route}/>
             <Button
               title="Navigate to Dummy Page"
               onPress={() => navigation.navigate("DummyPage")}
             />
             <Button title="Logout" onPress={logout} />
+    
       </View>
     )
 }
@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
+
   },
+
 });

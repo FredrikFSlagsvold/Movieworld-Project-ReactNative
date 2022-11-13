@@ -10,7 +10,7 @@ import {
     View
   } from "react-native";
 import { width } from "@mui/system";
-import { debounce } from "@mui/material";
+import { debounce, Hidden } from "@mui/material";
 import { MOVIESPERPAGE } from "../page/Homepage";
   
 
@@ -135,57 +135,62 @@ function handleSearchBy(e: {
 
   return (
     <View style={styles.view}>
+
+        <View >
+          <ListItem.Accordion
+              content={
+                <>
+                  <ListItem.Content>
+                    <ListItem.Title>{searchBy}</ListItem.Title>
+                  </ListItem.Content>
+                </>
+              }
+              isExpanded={isSearchExpanded}
+              onPress={() => {
+                setIsSearchExpanded(!isSearchExpanded);
+              }} 
+          >
+            {FILTER.map((l,i)=>(
+              <ListItem key={i} onPress={()=> handleSearchBy(l)} bottomDivider>
+                <ListItem.Content>
+                  <ListItem.Title>{l.value}</ListItem.Title>
+                </ListItem.Content>
+              </ListItem>
+            ))}
+          </ListItem.Accordion>
+
         <ListItem.Accordion
-             content={
-              <>
+              content={
+                <>
+                  <ListItem.Content>
+                    <ListItem.Title>{sortBy}</ListItem.Title>
+                  </ListItem.Content>
+                </>
+              }
+              isExpanded={isSortExpanded}
+              onPress={() => {
+                setIsSortExpanded(!isSortExpanded);
+              }} 
+          >
+            {SORT.map((l,i)=>(
+              <ListItem key={i} onPress={()=>handeSortBy(l)} bottomDivider>
                 <ListItem.Content>
-                  <ListItem.Title>{searchBy}</ListItem.Title>
+                  <ListItem.Title>{l.value}</ListItem.Title>
                 </ListItem.Content>
-              </>
-            }
-            isExpanded={isSearchExpanded}
-            onPress={() => {
-              setIsSearchExpanded(!isSearchExpanded);
-            }} 
-        >
-          {FILTER.map((l,i)=>(
-            <ListItem key={i} onPress={()=> handleSearchBy(l)} bottomDivider>
-              <ListItem.Content>
-                <ListItem.Title>{l.value}</ListItem.Title>
-              </ListItem.Content>
-            </ListItem>
-          ))}
-        </ListItem.Accordion>
+              </ListItem>
+            ))}
+          </ListItem.Accordion>
+        </View>
 
-
-        <SearchBar 
-         placeholder="Search"
-         onChangeText={updateSearch}
-         value={search}/>
-
-
-       <ListItem.Accordion
-             content={
-              <>
-                <ListItem.Content>
-                  <ListItem.Title>{sortBy}</ListItem.Title>
-                </ListItem.Content>
-              </>
-            }
-            isExpanded={isSortExpanded}
-            onPress={() => {
-              setIsSortExpanded(!isSortExpanded);
-            }} 
-        >
-          {SORT.map((l,i)=>(
-            <ListItem key={i} onPress={()=>handeSortBy(l)} bottomDivider>
-              <ListItem.Content>
-                <ListItem.Title>{l.value}</ListItem.Title>
-              </ListItem.Content>
-            </ListItem>
-          ))}
-        </ListItem.Accordion>
-
+          <SearchBar 
+          containerStyle= {styles.container}
+          inputContainerStyle={styles.theme}
+           round
+           lightTheme
+           clearIcon
+           placeholder="Search"
+           onChangeText={updateSearch}
+           value={search}/>
     </View>
     );
 }
@@ -193,14 +198,17 @@ function handleSearchBy(e: {
 
 const styles = StyleSheet.create({
   view:{
-    margin: 10,
-    width: 160,
-     
+    flexDirection: "column",
   },
+  theme:{
+    backgroundColor:"",
+  },
+  container:{
+    backgroundColor:"white",
 
+  },
   TextInput: {
     fontSize: 18,
-
     borderColor: "#000000"
   },
 

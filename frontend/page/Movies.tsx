@@ -7,6 +7,7 @@ import { RootStackParamList } from "../types";
 import React, { useState } from "react";
 import { Button } from "@rneui/base";
 import { MOVIESPERPAGE } from "./Homepage";
+import { padding } from "@mui/system";
 
 type MovieProps = NativeStackScreenProps<RootStackParamList, "HomePage"> & {
   text: string;
@@ -36,7 +37,6 @@ export default function Movies({
 }: MovieProps) {
   const [limit, setLimit] = useState(MOVIESPERPAGE);
   const  [offset, setOffset] = useState(0)
-  const [scrollPosition,setScrollPosition]= useState(0)
   const { loading, error, data } = useQuery(MovieFeed, {
     variables: {
       offset: offset,
@@ -62,7 +62,7 @@ export default function Movies({
   if (error) return <Text>Error...</Text>;
   return (
     <ScrollView style={styles.container}>
-      {offset > 0 && <Button onPress={handlePrev}><Text>Load previous</Text></Button>}
+      {offset > 0 && <Button type="clear" onPress={handlePrev}><Text style={styles.button}>Load previous</Text></Button>}
       {data.moviesBySearch.map(
         ({
           title,
@@ -90,7 +90,7 @@ export default function Movies({
           );
         }
       )}
-      <Button onPress={handlePress}><Text>Load more</Text></Button>
+      <Button type="clear"  onPress={handlePress}><Text style={styles.button}>Load more</Text></Button>
 
       {/* INFINITE SCROLL: BUT RELOADS WHOLE PAGE*/}
        {/* {loading ?
@@ -134,8 +134,14 @@ export default function Movies({
     //   },
     // });
     const styles = StyleSheet.create({
+      button:{
+        fontSize: 16,
+        padding:16,
+        color: "pink"
+      },
       container: {
-        flex: 1
+        flex: 1,
+        marginHorizontal: 64
       },
       title: {
         fontSize: 25,
