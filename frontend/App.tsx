@@ -8,6 +8,7 @@ import DummyPage from './page/DummyPage';
 import Login from './components/Login';
 import CreateUser from './components/CreateUser';
 import DisplayMovie from './components/DisplayMovie';
+import LikedMovies from './components/LikedMovies';
 
 
 const client = new ApolloClient({
@@ -23,10 +24,7 @@ export default function App() {
       <NavigationContainer>
           <Stack.Navigator initialRouteName='Login'>
 
-          <Stack.Screen
-          name='HomePage'
-          component={HomePage}
-          />
+          <Stack.Screen name='HomePage'component={HomePage}/>
 
           <Stack.Screen name="DummyPage" component={DummyPage} />
 
@@ -35,6 +33,8 @@ export default function App() {
           <Stack.Screen name="CreateUser" component={CreateUser} />
 
           <Stack.Screen name="DisplayMovie" component={DisplayMovie} />
+
+          <Stack.Screen name="LikedMovies" component={LikedMovies} />
 
         </Stack.Navigator>
       </NavigationContainer>

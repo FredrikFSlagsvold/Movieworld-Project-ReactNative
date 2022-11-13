@@ -185,3 +185,15 @@ export const MovieFeed = gql`
     }
 `; 
 
+    export const GET_USER = gql`
+    query Query($id: String) {
+    userByID( 
+      id: $id
+    ) {
+      likedMovies{
+        movieName
+      }
+    }
+  }
+  `;
+
