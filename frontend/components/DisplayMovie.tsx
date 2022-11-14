@@ -13,7 +13,7 @@ import WebView from "react-native-webview";
 import { useNavigate, useParams } from "react-router-dom";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../types";
-//import DisplaySingleMovie from "./DisplaySingleMovie";
+import DisplaySingleMovie from "./DisplaySingleMovie";
 //import FavoriteButton from "./FavoriteButton";
 //import { useParams, useNavigate, Link } from "react-router-dom";
 
@@ -91,7 +91,6 @@ export default function DisplayMovie({ navigation, route }: DisplayMovieProps) {
               })}
             </Text>
             <Text style={styles.header}>Trailer</Text>
-
             <WebView
               style={styles.video}
               javaScriptEnabled={true}
@@ -102,6 +101,23 @@ export default function DisplayMovie({ navigation, route }: DisplayMovieProps) {
               }}
             />
             <Text style={styles.header}>Similar movies</Text>
+            <View style={styles.singleContainer}>
+              {similarData?.movieListByIDs.map((data: any) => {
+                return (
+                  <DisplaySingleMovie
+                    navigation={data.navigation}
+                    poster_path={data.poster_path}
+                    title={data.title}
+                    runtime={data.runtime}
+                    genres={data.genres}
+                    vote_average={data.vote_average}
+                    release_date={data.release_date}
+                    id={data.id}
+                    route={data.route}
+                  />
+                );
+              })}
+            </View>
           </View>
         </View>
       </ScrollView>
@@ -114,6 +130,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     marginHorizontal: 10,
+    backgroundColor: "white",
   },
   details: {
     alignItems: "stretch",
@@ -156,79 +173,10 @@ const styles = StyleSheet.create({
     height: 400,
     borderRadius: 20,
   },
+  singleContainer: {
+    fontSize: 12,
+    margin: 0,
+    cursor: "pointer",
+    width: 250,
+  },
 });
-
-{
-  /* 
-      <View
-        style={{
-          backgroundColor: "white",
-          margin: "0px 200px 0px",
-        }}
-      >
-        <text style={{ textAlign: "center" }}>{data.movieByID.title}</text>
-        <View style={{ display: "flex", justifyContent: "space-around" }}>
-          <text>{data?.movieByID.release_date.substring(0, 4)}</text>
-          <text>{data?.movieByID.original_language}</text>
-          <text>{data?.movieByID.runtime} minutes</text>
-        </View>
-
-        <View style={{ display: "flex", padding: "5px" }}>
-          <View>
-            
-            <text>Directors</text>
-            {data?.movieByID.directors.map((director: any) => {
-              return <View key={director.id}>{director.name}</View>;
-            })}
-          
-            <text>Cast</text>
-            {data?.movieByID.cast.map((actor: any) => {
-              return <View key={actor.id}>{actor.name}</View>;
-            })}
-
-            <text>Description</text>
-            {data?.movieByID.overview}
-  
-            <text>Categories</text>
-            {data?.movieByID.genres.join(", ")}
-          </View>
-          <img
-            src={
-              "https://image.tmdb.org/t/p/original/" +
-              data.movieByID.poster_path
-            }
-            alt=""
-            style={{ margin: "5px 10px 5px" }}
-            width="299.52px"
-            height="449.28px"
-          />
-        </View>
-        <View>
-
-          <text>Trailer</text>
-          <iframe
-            title={data.movieByID.title}
-            width="693 "
-            height="520"
-            src={"https://www.youtube.com/embed/" + data.movieByID.trailer_yt}
-          />
-        </View>
-
-        <text>Similar movies</text>
-        <View
-          style={{
-            display: "flex",
-            flexWrap: "wrap",
-            justifyContent: "center",
-            padding: "56px",
-          }}
-        >
-          {similarData?.movieListByIDs.map((data: any) => {
-            return (
-              <View key={Number(data.id)} style={{ margin: "8px" }}></View>
-            );
-          })}
-        </View>
-      </View>
-    */
-}
