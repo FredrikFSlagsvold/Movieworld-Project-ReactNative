@@ -7,10 +7,13 @@ import {
   View,
   TextInput,
   TouchableOpacity,
+  KeyboardAvoidingView,
+  Platform,
 } from "react-native";
 import { LOGIN_MUTATION } from "../utils/Queries";
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../types';
+import React from "react";
 
 type LoginProps = NativeStackScreenProps<RootStackParamList, 'Login'>
 
@@ -38,7 +41,9 @@ const Login = ({navigation} : LoginProps)  => {
   }
 
       return(
-        <View style={styles.container}>
+        <KeyboardAvoidingView 
+      behavior={Platform.OS === "ios" ? "padding" : "height"} 
+      style={styles.container}>
           <Text style={styles.title}>Login</Text>
           <View style={styles.inputView}>
             <TextInput 
@@ -63,9 +68,8 @@ const Login = ({navigation} : LoginProps)  => {
           <TouchableOpacity onPress={() => navigation.replace('CreateUser')}>
             <Text style={styles.forgot_button}>Go to register page</Text>
           </TouchableOpacity>
-        </View>
+          </KeyboardAvoidingView>
       )
-
 }
 
 const styles = StyleSheet.create({
@@ -95,6 +99,8 @@ const styles = StyleSheet.create({
  
   TextInput: {
     fontSize: 18,
+     width: "100%",
+     textAlign: "center",
   },
 
   TextInputBtn: {
