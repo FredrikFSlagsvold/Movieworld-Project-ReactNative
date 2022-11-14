@@ -4,4 +4,5 @@ export type RootStackParamList = {
     DisplayMovie: {id: number}
     Login: undefined
     CreateUser: undefined
+    LikedMovies: undefined
 }

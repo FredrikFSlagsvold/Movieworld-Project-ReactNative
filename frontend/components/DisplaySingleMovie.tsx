@@ -1,6 +1,7 @@
 import { style } from "@mui/system";
 import { NavigationContainer } from "@react-navigation/native";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import React from "react";
 import { StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
 import { RootStackParamList } from "../types";
 
@@ -79,7 +80,7 @@ const styles = StyleSheet.create({
   },
   image: {
     width: "100%",
-    height: 220,
     borderRadius: 20,
+    height: 300,
   },
 });
