@@ -9,9 +9,13 @@ import {
   TextInput,
   Button,
   TouchableOpacity,
+  KeyboardAvoidingView,
+  Platform,
+
 } from "react-native";
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../types';
+import React from "react";
 
 type CreateUserProps = NativeStackScreenProps<RootStackParamList, 'CreateUser'>
 
@@ -39,7 +43,9 @@ export default function CreateUser({ navigation } : CreateUserProps) {
       });
 
       return(
-        <View style={styles.container}>
+      <KeyboardAvoidingView 
+      behavior={Platform.OS === "ios" ? "padding" : "height"} 
+      style={styles.container}>
           <Text style={styles.title}>Register new user</Text>
           <View style={styles.inputView}>
             <TextInput 
@@ -80,12 +86,13 @@ export default function CreateUser({ navigation } : CreateUserProps) {
           <TouchableOpacity onPress={() => navigation.replace('Login')}>
             <Text style={styles.forgot_button}>Already have an account? Go to login page</Text>
           </TouchableOpacity>
-        </View>
+        </KeyboardAvoidingView>
       )
 
 }
 
 const styles = StyleSheet.create({
+
   container: {
     flex: 1,
     backgroundColor: "#fff",
@@ -112,6 +119,8 @@ const styles = StyleSheet.create({
  
   TextInput: {
     fontSize: 18,
+    width: "100%", 
+    textAlign: "center"
   },
 
   TextInputBtn: {
