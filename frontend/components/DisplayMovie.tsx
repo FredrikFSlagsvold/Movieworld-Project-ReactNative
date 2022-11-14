@@ -1,7 +1,14 @@
 import { useQuery, useLazyQuery } from "@apollo/client";
 import React, { useEffect } from "react";
 import { GET_MOVIE, GET_SIMILAR_MOVIES } from "../utils/Queries";
-import { View, Text, StyleSheet, Platform, ScrollView } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  Platform,
+  ScrollView,
+  Image,
+} from "react-native";
 import WebView from "react-native-webview";
 import { useNavigate, useParams } from "react-router-dom";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
@@ -41,32 +48,44 @@ export default function DisplayMovie({ navigation, route }: DisplayMovieProps) {
     <View style={styles.container}>
       <ScrollView>
         <Text style={styles.title}>{data.movieByID.title}</Text>
-
+        <Image
+          style={styles.image}
+          source={{
+            uri:
+              "https://image.tmdb.org/t/p/w600_and_h900_bestv2/" +
+              data.movieByID.poster_path,
+          }}
+        />
         <View style={styles.details}>
-          <Text>{data.movieByID.release_date.substring(0, 4)}</Text>
-          <Text>{data.movieByID.original_language}</Text>
-          <Text>{data.movieByID.runtime} minutes</Text>
+          <Text style={styles.text}>
+            {data.movieByID.vote_average} stars *CHANGE TO ICON*
+          </Text>
+          <Text style={styles.text}>
+            {data.movieByID.release_date.substring(0, 4)}
+          </Text>
+          <Text style={styles.text}>{data.movieByID.original_language}</Text>
+          <Text style={styles.text}>{data.movieByID.runtime} minutes</Text>
         </View>
 
         <View>
           <View>
             <Text style={styles.header}>Directors</Text>
-            <Text>
+            <Text style={styles.text}>
               {data.movieByID.directors.map((d: any) => {
                 return <Text>{d.name + "\n"}</Text>;
               })}
             </Text>
             <Text style={styles.header}>Cast</Text>
-            <Text>
+            <Text style={styles.text}>
               {data.movieByID.cast.map((a: any) => {
                 return <Text>{a.name + "\n"}</Text>;
               })}
             </Text>
             <Text style={styles.header}>Description</Text>
-            <Text>{data.movieByID.overview}</Text>
+            <Text style={styles.text}>{data.movieByID.overview}</Text>
             <Text>{"\n"}</Text>
             <Text style={styles.header}>Categories</Text>
-            <Text>
+            <Text style={styles.text}>
               {data.movieByID.genres.map((c: any) => {
                 return <Text>{c + "\n"}</Text>;
               })}
@@ -82,6 +101,7 @@ export default function DisplayMovie({ navigation, route }: DisplayMovieProps) {
                   "https://www.youtube.com/embed/" + data.movieByID.trailer_yt,
               }}
             />
+            <Text style={styles.header}>Similar movies</Text>
           </View>
         </View>
       </ScrollView>
@@ -93,12 +113,13 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
-    marginTop: "20%",
+    marginHorizontal: 10,
   },
   details: {
     alignItems: "stretch",
-    flexDirection: "row",
+    flexDirection: "column",
     justifyContent: "space-between",
+    margin: 10,
   },
   greeting: {
     fontSize: 20,
@@ -106,18 +127,34 @@ const styles = StyleSheet.create({
     margin: 16,
   },
   title: {
-    fontSize: 20,
+    fontSize: 30,
     fontWeight: "bold",
     marginBottom: "5%",
+    alignSelf: "center",
   },
   header: {
-    fontSize: 16,
+    fontSize: 30,
     fontWeight: "bold",
-    backgroundColor: "#F3CCCC",
+    color: "#8b6363",
+    alignSelf: "center",
   },
   video: {
     margin: 10,
     scalesPageToFit: true,
+    width: "95%",
+    height: 230,
+    alignSelf: "center",
+  },
+  text: {
+    fontSize: 15,
+    alignSelf: "center",
+    textAlign: "center",
+  },
+  image: {
+    alignSelf: "center",
+    width: "80%",
+    height: 400,
+    borderRadius: 20,
   },
 });
 
