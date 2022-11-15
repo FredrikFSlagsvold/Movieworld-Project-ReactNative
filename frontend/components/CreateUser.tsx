@@ -17,6 +17,7 @@ import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../types';
 import React from "react";
 
+
 type CreateUserProps = NativeStackScreenProps<RootStackParamList, 'CreateUser'>
 
 type UserProps= {
@@ -80,6 +81,10 @@ export default function CreateUser({ navigation } : CreateUserProps) {
               onChangeText={(password) => setPassword(password)}
             />
             </View>
+        {data?.userByUserName.length === 1 && <View><TextInput style={styles.errorMessage}>This username already exists</TextInput></View>}
+        {(userName === "" || password === "" || firstName === "" || lastName === "") && <View><TextInput>All fields must be filled</TextInput></View>}
+
+           
           <TouchableOpacity disabled={userName === "" || password === "" || firstName === "" || lastName === "" || data?.userByUserName.length !== 0} onPress={()=> {signup();navigation.replace('Login')}} style={styles.loginBtn}>
             <Text style={styles.TextInputBtn}>Register new user</Text>
           </TouchableOpacity>
@@ -102,6 +107,10 @@ const styles = StyleSheet.create({
  
   image: {
     marginBottom: 40,
+  },
+
+    errorMessage: {
+    color: "red", 
   },
  
   inputView: {
