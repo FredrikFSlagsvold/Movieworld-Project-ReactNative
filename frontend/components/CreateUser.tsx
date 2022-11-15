@@ -150,7 +150,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     marginTop: 40,
-    backgroundColor: "#8b6363",
+    backgroundColor: "#99c5f0",
   },
 
   title: {
