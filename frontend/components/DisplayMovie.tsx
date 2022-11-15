@@ -19,11 +19,11 @@ import DisplaySingleMovie from "./DisplaySingleMovie";
 
 type DisplayMovieProps = NativeStackScreenProps<
   RootStackParamList,
-  "HomePage"
+  "DisplayMovie"
 >;
 
 export default function DisplayMovie({ navigation, route }: DisplayMovieProps) {
-  const { id } : any = route.params;
+  const { id } = route.params;
 
   const { loading, error, data } = useQuery(GET_MOVIE, {
     variables: { id: id },

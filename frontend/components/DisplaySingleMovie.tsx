@@ -7,7 +7,7 @@ import { RootStackParamList } from "../types";
 
 type DisplaySingleMovieProps = NativeStackScreenProps<
   RootStackParamList,
-  "HomePage"
+  "DisplayMovie"
 > & {
   poster_path: String;
   title: String;
