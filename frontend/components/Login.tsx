@@ -72,7 +72,7 @@ const Login = ({navigation} : LoginProps)  => {
             <Text style={styles.TextInputBtn}>Login</Text>
           </TouchableOpacity>
           <TouchableOpacity onPress={() => navigation.replace('CreateUser')}>
-            <Text style={styles.forgot_button}>Go to register page</Text>
+            <Text style={styles.toRegister}>Go to register page</Text>
           </TouchableOpacity>
           </KeyboardAvoidingView>
       )
@@ -118,7 +118,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
   },
  
-  forgot_button: {
+  toRegister: {
     height: 30,
     margin: 20,
     fontSize: 15,

@@ -89,7 +89,7 @@ export default function CreateUser({ navigation } : CreateUserProps) {
             <Text style={styles.TextInputBtn}>Register new user</Text>
           </TouchableOpacity>
           <TouchableOpacity onPress={() => navigation.replace('Login')}>
-            <Text style={styles.forgot_button}>Already have an account? Go to login page</Text>
+            <Text style={styles.toLogin}>Already have an account? Go to login page</Text>
           </TouchableOpacity>
         </KeyboardAvoidingView>
       )
@@ -137,7 +137,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
   },
  
-  forgot_button: {
+  toLogin: {
     height: 30,
     margin: 20,
     fontSize: 15,
