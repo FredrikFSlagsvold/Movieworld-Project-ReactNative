@@ -14,6 +14,8 @@ type MovieProps = NativeStackScreenProps<RootStackParamList, "HomePage"> & {
   filter: string;
   sort: number;
   sortType: string;
+  offset: number;
+  setOffset: React.Dispatch<React.SetStateAction<number>>;
 };
 
 type DisplaySingleMovieProps = {
@@ -34,9 +36,10 @@ export default function Movies({
   text,
   sort,
   sortType,
+  offset, 
+  setOffset
 }: MovieProps) {
   const [limit, setLimit] = useState(MOVIESPERPAGE);
-  const  [offset, setOffset] = useState(0)
   const { loading, error, data } = useQuery(MovieFeed, {
     variables: {
       offset: offset,
@@ -90,7 +93,7 @@ export default function Movies({
           );
         }
       )}
-      <Button type="clear"  onPress={handlePress}><Text style={styles.button}>Load more</Text></Button>
+      <Button type="clear" onPress={handlePress}><Text style={styles.button}>Load more</Text></Button>
 
       {/* INFINITE SCROLL: BUT RELOADS WHOLE PAGE*/}
        {/* {loading ?

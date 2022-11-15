@@ -30,7 +30,7 @@ export default function HomePage({ navigation, route }: HomePageProps) {
   return (
     <View style={styles.container}>
       <SearchField searchText={searchText} filter={searchFilter} setSearchFilter={setSearchFilter} setSearchText={setSearchText} setNumberOfPages={setNumberOfPages} setSortType={setSortType} setOffset={setOffset} sortType={sortType} setSort={setSort}/>
-      <Movies text={searchText} filter={searchFilter} sort={sort} sortType={sortType} navigation={navigation} route={route}/>
+      <Movies text={searchText} filter={searchFilter} sort={sort} sortType={sortType} navigation={navigation} route={route} offset={offset} setOffset={setOffset}/>
       <Button
         title="Go to favorites"
         onPress={() => navigation.navigate("LikedMovies")}
