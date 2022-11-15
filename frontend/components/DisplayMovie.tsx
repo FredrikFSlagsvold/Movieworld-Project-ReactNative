@@ -185,6 +185,7 @@ const styles = StyleSheet.create({
   singleMovie: {
     flexDirection:"row",
     flexWrap:"wrap",
-    justifyContent:"center"
+    justifyContent:"center",
+    marginBottom: "10%"
   },
 });
