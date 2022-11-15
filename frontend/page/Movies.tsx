@@ -17,6 +17,7 @@ type MovieProps = {
   sort: number;
   sortType: string;
   offset: number;
+  numberOfPages: number;
   setOffset: React.Dispatch<React.SetStateAction<number>>;
   navigation: NativeStackNavigationProp<RootStackParamList, "HomePage">,
   route: RouteProp<RootStackParamList, "HomePage">
@@ -41,13 +42,13 @@ export default function Movies({
   sort,
   sortType,
   offset, 
-  setOffset
+  setOffset,
+  numberOfPages
 }: MovieProps) {
-  const [limit, setLimit] = useState(MOVIESPERPAGE);
   const { loading, error, data } = useQuery(MovieFeed, {
     variables: {
       offset: offset,
-      limit: limit,
+      limit: MOVIESPERPAGE,
       filter: filter,
       text: text,
       sort: sort,
@@ -98,7 +99,7 @@ export default function Movies({
           }
         )}
       </View>
-      <Button type="clear" onPress={handlePress}><Text style={styles.button}>Next page</Text></Button>
+      <Button type="clear" onPress={handlePress} disabled={data.moviesBySearch.length < MOVIESPERPAGE}><Text style={styles.button}>Next page</Text></Button>
     </ScrollView>
   );
 }

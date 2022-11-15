@@ -9,7 +9,6 @@ import {
     View
   } from "react-native";
 import { MOVIESPERPAGE } from "../assets/const";
-// import { MOVIESPERPAGE } from "../page/Homepage";
   
 
 type SearchProps ={
