@@ -3,30 +3,33 @@ import DisplaySingleMovie from "./DisplaySingleMovie";
 import { useNavigate } from "react-router-dom";
 import { GET_MOVIEBYNAME } from "../utils/Queries";
 import { View, StyleSheet } from "react-native";
-import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import { NativeStackNavigationProp, NativeStackScreenProps } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../types";
 import React from "react";
+import { RouteProp } from "@react-navigation/native";
 
 
 type DisplayLikedMovieProps ={
-    movieName: String
+    movieName: String,
+    navigation: NativeStackNavigationProp<RootStackParamList, "DisplayMovie">,
+    route: RouteProp<RootStackParamList, "DisplayMovie">
 }
 
-type DisplaySingleMovieProps ={
+type DisplaySingleMovieProps = {
     poster_path: String;
     original_language: String;
     title: String;
     runtime: number;
     genres: [String]; 
-    id: String,
+    id: number,
     vote_average: number,
-    release_date: String
+    release_date: String,
+    navigation: NativeStackNavigationProp<RootStackParamList, "DisplayMovie">
+    route: RouteProp<RootStackParamList, "DisplayMovie">
 }
 
-type HomePageProps = NativeStackScreenProps<RootStackParamList, "DisplayMovie">;
 
-export default function DisplayLikedMovie({movieName}: DisplayLikedMovieProps,
-    { navigation, route }: HomePageProps){
+export default function DisplayLikedMovie({movieName, navigation, route}: DisplayLikedMovieProps){
     const {data } = useQuery(GET_MOVIEBYNAME, {
         variables: { title: movieName },
       });
@@ -36,7 +39,7 @@ export default function DisplayLikedMovie({movieName}: DisplayLikedMovieProps,
             {data && data.movieByName.map(({ title, genres, poster_path, runtime, original_language, id, vote_average, release_date }: DisplaySingleMovieProps) => { return (
                     
                 <View style={styles.container}>
-                    <DisplaySingleMovie release_date={release_date} vote_average={vote_average} poster_path={poster_path} title={title} runtime={runtime} genres={genres} navigation={navigation} route={route} id={0}/>
+                    <DisplaySingleMovie key={id} release_date={release_date} vote_average={vote_average} poster_path={poster_path} title={title} runtime={runtime} genres={genres} navigation={navigation} route={route} id={id}/>
                 </View>
             )})}
         </>

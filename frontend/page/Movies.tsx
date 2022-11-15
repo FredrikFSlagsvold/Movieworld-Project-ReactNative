@@ -2,20 +2,23 @@ import { useQuery } from "@apollo/client";
 import DisplaySingleMovie from "../components/DisplaySingleMovie";
 import { MovieFeed } from "../utils/Queries";
 import { StyleSheet, Text, ScrollView, View, ActivityIndicator, FlatList, SafeAreaView } from "react-native";
-import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import { NativeStackNavigationProp, NativeStackScreenProps } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../types";
 import React, { useState } from "react";
 import { Button } from "@rneui/base";
 import { MOVIESPERPAGE } from "./Homepage";
 import { padding } from "@mui/system";
+import { RouteProp } from "@react-navigation/native";
 
-type MovieProps = NativeStackScreenProps<RootStackParamList, "HomePage"> & {
+type MovieProps = {
   text: string;
   filter: string;
   sort: number;
   sortType: string;
   offset: number;
   setOffset: React.Dispatch<React.SetStateAction<number>>;
+  navigation: NativeStackNavigationProp<RootStackParamList, "HomePage">,
+  route: RouteProp<RootStackParamList, "HomePage">
 };
 
 type DisplaySingleMovieProps = {
