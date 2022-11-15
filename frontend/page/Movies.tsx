@@ -1,14 +1,15 @@
 import { useQuery } from "@apollo/client";
 import DisplaySingleMovie from "../components/DisplaySingleMovie";
 import { MovieFeed } from "../utils/Queries";
-import { StyleSheet, Text, ScrollView, View, ActivityIndicator, FlatList, SafeAreaView } from "react-native";
-import { NativeStackNavigationProp, NativeStackScreenProps } from "@react-navigation/native-stack";
+import { StyleSheet, Text, ScrollView, View } from "react-native";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../types";
 import React, { useState } from "react";
 import { Button } from "@rneui/base";
-import { MOVIESPERPAGE } from "./Homepage";
-import { padding } from "@mui/system";
+//TODO USE AS PROPS
 import { RouteProp } from "@react-navigation/native";
+import { MOVIESPERPAGE } from "../assets/const";
+
 
 type MovieProps = {
   text: string;
@@ -21,7 +22,7 @@ type MovieProps = {
   route: RouteProp<RootStackParamList, "HomePage">
 };
 
-type DisplaySingleMovieProps = {
+export type DisplaySingleMovieProps = {
   poster_path: String;
   original_language: String;
   title: String;
@@ -55,7 +56,6 @@ export default function Movies({
   });
 
   function handlePress(){
-    //  setLimit(prev => prev+MOVIESPERPAGE)
      setOffset(prev => prev+MOVIESPERPAGE)
   }
 
@@ -68,7 +68,7 @@ export default function Movies({
   if (error) return <Text>Error...</Text>;
   return (
     <ScrollView>
-      {offset > 0 && <Button type="clear" onPress={handlePrev}><Text style={styles.button}>Load previous</Text></Button>}
+      {offset > 0 && <Button type="clear" onPress={handlePrev}><Text style={styles.button}>Previous page</Text></Button>}
       <View style={styles.singleMovie}>
         {data.moviesBySearch.map(
           ({
@@ -98,60 +98,22 @@ export default function Movies({
           }
         )}
       </View>
-      <Button type="clear" onPress={handlePress}><Text style={styles.button}>Load more</Text></Button>
-
-      {/* INFINITE SCROLL: BUT RELOADS WHOLE PAGE*/}
-       {/* {loading ?
-                <View style={styles.loading}>
-                <ActivityIndicator size='large' />
-                </View>
-                :
-                <FlatList
-                    contentContainerStyle={{flexGrow: 1}}
-                    data={data.moviesBySearch}
-                    renderItem={({ item }) => (
-                      <DisplaySingleMovie
-                      navigation={navigation}
-                      route={route}
-                      id={item.id}
-                      poster_path={item.poster_path}
-                      release_date={item.release_date}
-                      vote_average={item.vote_average}
-                      title={item.title}
-                      runtime={item.runtime}
-                      genres={item.genres}
-                      />
-                      )}
-                      ListHeaderComponent={renderHeader}
-                      ListFooterComponent={renderFooter}
-                      ListEmptyComponent={renderEmpty}
-                      onEndReachedThreshold={0.2}
-                      onEndReached={fetchMoreData}
-                      />
-                    } */}
-
+      <Button type="clear" onPress={handlePress}><Text style={styles.button}>Next page</Text></Button>
     </ScrollView>
   );
 }
 
-// const styles = StyleSheet.create({
-  //   container: {
-    //     display: "flex",
-    //     flexWrap: "wrap",
-    //     width: "100%",
-    //   },
-    // });
-    const styles = StyleSheet.create({
-      button:{
-        fontSize: 16,
-        padding:16,
-        color: "pink"
-      },
-      singleMovie: {
-        flexDirection:"row",
-        flexWrap:"wrap",
-        justifyContent:"center"
-      },
-      
-    })
+ const styles = StyleSheet.create({
+  button:{
+    fontSize: 16,
+    padding:16,
+    color: "pink"
+  },
+  singleMovie: {
+    flexDirection:"row",
+    flexWrap:"wrap",
+    justifyContent:"center"
+  },
+  
+})
   

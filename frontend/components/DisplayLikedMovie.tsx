@@ -1,9 +1,7 @@
 import { useQuery } from "@apollo/client";
 import DisplaySingleMovie from "./DisplaySingleMovie";
-import { useNavigate } from "react-router-dom";
 import { GET_MOVIEBYNAME } from "../utils/Queries";
-import { View, StyleSheet } from "react-native";
-import { NativeStackNavigationProp, NativeStackScreenProps } from "@react-navigation/native-stack";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../types";
 import React from "react";
 import { RouteProp } from "@react-navigation/native";
@@ -35,21 +33,10 @@ export default function DisplayLikedMovie({movieName, navigation, route}: Displa
       });
 
     return (
-        <>
-            {data && data.movieByName.map(({ title, genres, poster_path, runtime, original_language, id, vote_average, release_date }: DisplaySingleMovieProps) => { return (
-                    
-                <View style={styles.singleMovie} key={id}>
-                    <DisplaySingleMovie key={id} release_date={release_date} vote_average={vote_average} poster_path={poster_path} title={title} runtime={runtime} genres={genres} navigation={navigation} route={route} id={id}/>
-                </View>
-            )})}
-        </>
-        )
+    <>
+    {data && data.movieByName.map(({ title, genres, poster_path, runtime, original_language, id, vote_average, release_date }: DisplaySingleMovieProps) => { return (
+            <DisplaySingleMovie key={id} release_date={release_date} vote_average={vote_average} poster_path={poster_path} title={title} runtime={runtime} genres={genres} navigation={navigation} route={route} id={id}/>
+    )})}
+    </>
+    )
 }
-
-const styles = StyleSheet.create({
-    singleMovie: {
-        flexDirection:"row",
-        flexWrap:"wrap",
-        justifyContent:"center"
-      },
-  });

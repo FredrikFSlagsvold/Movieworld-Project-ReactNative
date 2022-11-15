@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useQuery } from '@apollo/client';
 import { SearchBar } from '@rneui/themed';
 import { ListItem } from '@rneui/themed';
@@ -6,12 +6,10 @@ import { GetNumberOfResults } from "../utils/Queries";
 import { useDebounce } from 'use-debounce';
 import {
     StyleSheet,
-    Text,
     View
   } from "react-native";
-import { width } from "@mui/system";
-import { debounce, Hidden } from "@mui/material";
-import { MOVIESPERPAGE } from "../page/Homepage";
+import { MOVIESPERPAGE } from "../assets/const";
+// import { MOVIESPERPAGE } from "../page/Homepage";
   
 
 type SearchProps ={
@@ -30,17 +28,14 @@ const FILTER = [
   { 
     value: "Movie",
     dbValue: "title",
-    // icon: <MovieIcon sx={{ color:"#8b6363"}} fontSize='inherit'/>
   },
   { 
     value: "Actor",
     dbValue: "cast.name",
-    // icon: <Face6Icon sx={{ color:"#8b6363"}} />
   },
   { 
     value: "Category",
     dbValue: "genres",
-    // icon: <CategoryIcon sx={{ color:"#8b6363"}} />
   },
 ]
 
@@ -48,7 +43,6 @@ const SORT = [
   {
     value: "New-old",
     sortType: "release_date",
-
   }, 
   {
     value: "Old-new",
@@ -65,14 +59,12 @@ const SORT = [
   },
  ]
 
-
 export default function SearchField({setSearchFilter, 
   setSearchText, 
   searchText, 
   setNumberOfPages, 
   filter, 
   setSortType, 
-  sortType, 
   setOffset, 
   setSort}: SearchProps){
 
@@ -83,7 +75,6 @@ export default function SearchField({setSearchFilter,
   const [isSortExpanded, setIsSortExpanded] = useState(false);
 
   const [value] = useDebounce(search, 1000)
-
 
   const updateSearch = (search: string) => {
     setOffset(prev => prev * 0)
@@ -136,64 +127,63 @@ function handleSearchBy(e: {
 
   return (
     <View style={styles.view}>
-
-        <View >
-          <ListItem.Accordion
-              content={
-                <>
-                  <ListItem.Content>
-                    <ListItem.Title>{searchBy}</ListItem.Title>
-                  </ListItem.Content>
-                </>
-              }
-              isExpanded={isSearchExpanded}
-              onPress={() => {
-                setIsSearchExpanded(!isSearchExpanded);
-              }} 
-          >
-            {FILTER.map((l,i)=>(
-              <ListItem key={i} onPress={()=> handleSearchBy(l)} bottomDivider>
-                <ListItem.Content>
-                  <ListItem.Title>{l.value}</ListItem.Title>
-                </ListItem.Content>
-              </ListItem>
-            ))}
-          </ListItem.Accordion>
-
+      <View >
         <ListItem.Accordion
-              content={
-                <>
-                  <ListItem.Content>
-                    <ListItem.Title>{sortBy}</ListItem.Title>
-                  </ListItem.Content>
-                </>
-              }
-              isExpanded={isSortExpanded}
-              onPress={() => {
-                setIsSortExpanded(!isSortExpanded);
-              }} 
-          >
-            {SORT.map((l,i)=>(
-              <ListItem key={i} onPress={()=>handeSortBy(l)} bottomDivider>
+            content={
+              <>
                 <ListItem.Content>
-                  <ListItem.Title>{l.value}</ListItem.Title>
+                  <ListItem.Title>{searchBy}</ListItem.Title>
                 </ListItem.Content>
-              </ListItem>
-            ))}
-          </ListItem.Accordion>
-        </View>
+              </>
+            }
+            isExpanded={isSearchExpanded}
+            onPress={() => {
+              setIsSearchExpanded(!isSearchExpanded);
+            }} 
+        >
+          {FILTER.map((l,i)=>(
+            <ListItem key={i} onPress={()=> handleSearchBy(l)} bottomDivider>
+              <ListItem.Content>
+                <ListItem.Title>{l.value}</ListItem.Title>
+              </ListItem.Content>
+            </ListItem>
+          ))}
+        </ListItem.Accordion>
 
-          <SearchBar 
-          containerStyle= {styles.container}
-          inputContainerStyle={styles.theme}
-           round
-           lightTheme
-           clearIcon
-           placeholder="Search"
-           onChangeText={updateSearch}
-           value={search}/>
-    </View>
-    );
+      <ListItem.Accordion
+            content={
+              <>
+                <ListItem.Content>
+                  <ListItem.Title>{sortBy}</ListItem.Title>
+                </ListItem.Content>
+              </>
+            }
+            isExpanded={isSortExpanded}
+            onPress={() => {
+              setIsSortExpanded(!isSortExpanded);
+            }} 
+        >
+          {SORT.map((l,i)=>(
+            <ListItem key={i} onPress={()=>handeSortBy(l)} bottomDivider>
+              <ListItem.Content>
+                <ListItem.Title>{l.value}</ListItem.Title>
+              </ListItem.Content>
+            </ListItem>
+          ))}
+        </ListItem.Accordion>
+      </View>
+
+        <SearchBar 
+        containerStyle= {styles.container}
+        inputContainerStyle={styles.theme}
+          round
+          lightTheme
+          clearIcon
+          placeholder="Search"
+          onChangeText={updateSearch}
+          value={search}/>
+  </View>
+);
 }
 
 
@@ -207,36 +197,5 @@ const styles = StyleSheet.create({
   container:{
     backgroundColor:"white",
 
-  },
-  TextInput: {
-    fontSize: 18,
-    borderColor: "#000000"
-  },
-
-  TextInputBtn: {
-    color: "#ffffff",
-    fontSize: 18,
-  },
- 
-  forgot_button: {
-    height: 30,
-    margin: 20,
-    fontSize: 15,
-  },
- 
-  loginBtn: {
-    width: "80%",
-    borderRadius: 25,
-    height: 50,
-    alignItems: "center",
-    justifyContent: "center",
-    marginTop: 40,
-    backgroundColor: "#8b6363",
-  },
-
-  title: {
-    fontSize: 30,
-    padding: 30,
-    fontWeight: "bold"
   }
 });

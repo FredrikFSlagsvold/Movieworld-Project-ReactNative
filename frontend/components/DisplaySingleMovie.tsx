@@ -1,12 +1,12 @@
 import { style } from "@mui/system";
 import { NavigationContainer } from "@react-navigation/native";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import { Icon } from "@rneui/base";
 import React from "react";
 import { StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
 import { RootStackParamList } from "../types";
 
 
-//I feltet der det står "DisplayMovie" | "HomePage" skriver man fra hvilken hovedkomponent (fra App.tsx) navigation opprinnelig blir sendt inn fra. DisplaySingleMovie blir brukt i både DisplayMovie og HomePage. 
 
 type DisplaySingleMovieProps = NativeStackScreenProps<
   RootStackParamList,
@@ -46,21 +46,21 @@ export default function DisplaySingleMovie({
           }}
         />
 
-        {title.length > 17 ? (
-          <Text>{title.substring(0, 17) + "..."}</Text>
+        {title.length > 25 ? (
+          <Text style={styles.text}>{title.substring(0, 23) + "..."}</Text>
         ) : (
-          <Text>{title}</Text>
+          <Text style={styles.text}>{title}</Text>
         )}
 
-        {genresString.length > 17 ? (
-          <Text>{genresString.substring(0, 17) + "..."}</Text>
+        {genresString.length > 25 ? (
+          <Text style={styles.text}>{genresString.substring(0, 23) + "..."}</Text>
         ) : (
-          <Text>{genresString}</Text>
+          <Text style={styles.text}>{genresString}</Text>
         )}
 
         <View style={styles.movieInfo}>
           <Text>{runtime} min</Text>
-          <Text style={styles.movieInfo}>{vote_average}</Text>
+          <Text style={styles.movieInfo}><Icon name="star" size={16} />{vote_average}</Text>
           <Text>{release_date.substring(0, 4)}</Text>
         </View>
       </TouchableOpacity>
@@ -75,7 +75,8 @@ const styles = StyleSheet.create({
     padding:8,
     fontSize: 12,
     cursor: "pointer",
-    justifyContent:"center"
+    justifyContent:"center",
+    textAlign: "center"
   },
   movieInfo: {
     display: "flex",
@@ -88,5 +89,7 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     height: 300,
   },
-  
+  text: {
+    textAlign: "center"
+  }
 });

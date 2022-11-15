@@ -21,7 +21,6 @@ type LoginProps = NativeStackScreenProps<RootStackParamList, 'Login'>
 const Login = ({navigation} : LoginProps)  => {
     const [userName, setUserName] = useState('');
     const [password, setPassword] = useState(''); 
-    const [isWrongUser, setIsWrongUser] = useState(false)
     const [errorMessage, setErrorMessage] = useState("")
 
   const {data} = useQuery(LOGIN_MUTATION, {
@@ -40,7 +39,6 @@ const Login = ({navigation} : LoginProps)  => {
       }else{
         AsyncStorage.setItem("isLoggedIn", "false")
         setErrorMessage("Wrong username or password")
-        setIsWrongUser(true)
       }
   }
 
@@ -85,15 +83,9 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
- 
-  image: {
-    marginBottom: 40,
-  },
-
   errorMessage: {
     color: "red", 
   },
- 
   inputView: {
     backgroundColor: "#ffffff",
     borderRadius: 10,
@@ -106,24 +98,20 @@ const styles = StyleSheet.create({
     border: "solid", 
     borderWidth: 1,
   },
- 
   TextInput: {
     fontSize: 18,
      width: "100%",
      textAlign: "center",
   },
-
   TextInputBtn: {
     color: "#ffffff",
     fontSize: 18,
   },
- 
   toRegister: {
     height: 30,
     margin: 20,
     fontSize: 15,
   },
- 
   loginBtn: {
     width: "80%",
     borderRadius: 25,
@@ -133,7 +121,6 @@ const styles = StyleSheet.create({
     marginTop: 40,
     backgroundColor: "#99c5f0",
   },
-
   title: {
     fontSize: 30,
     padding: 30,
