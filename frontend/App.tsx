@@ -4,7 +4,6 @@ import HomePage from './page/Homepage';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { NavigationContainer } from '@react-navigation/native';
 import { RootStackParamList } from './types';
-import DummyPage from './page/DummyPage';
 import Login from './components/Login';
 import CreateUser from './components/CreateUser';
 import DisplayMovie from './components/DisplayMovie';
@@ -22,19 +21,27 @@ export default function App() {
   return (
     <ApolloProvider client={client}>
       <NavigationContainer>
-          <Stack.Navigator initialRouteName='Login'>
-            
-          <Stack.Screen name='HomePage'component={HomePage}/>
+          <Stack.Navigator screenOptions={{ headerStyle: { backgroundColor: '#99c5f0', },  }} initialRouteName='Login'>
 
-          <Stack.Screen name="DummyPage" component={DummyPage} />
+          <Stack.Screen name='HomePage'component={HomePage} options={{ title: 'M O V I E W O R L D', headerTitleStyle: {
+              color: '#fff', fontFamily: 'Verdana'
+            },}}/>
 
-          <Stack.Screen name="Login" component={Login} />
+          <Stack.Screen name="Login" component={Login} options={{ title: 'M O V I E W O R L D', headerTitleStyle: {
+              color: '#fff', fontFamily: 'Verdana'
+            },}}/>
 
-          <Stack.Screen name="CreateUser" component={CreateUser} />
+          <Stack.Screen name="CreateUser" component={CreateUser} options={{ title: 'M O V I E W O R L D', headerTitleStyle: {
+              color: '#fff', fontFamily: 'Verdana'
+            },}}/>
 
-          <Stack.Screen name="DisplayMovie" component={DisplayMovie} />
+          <Stack.Screen name="DisplayMovie" component={DisplayMovie} options={{ title: 'M O V I E W O R L D', headerTitleStyle: {
+              color: '#fff', fontFamily: 'Verdana'
+            },}}/>
 
-          <Stack.Screen name="LikedMovies" component={LikedMovies} />
+          <Stack.Screen name="LikedMovies" component={LikedMovies} options={{ title: 'Favorite movies', headerTitleStyle: {
+              color: '#fff', fontFamily: 'Verdana'
+            },}}/>
 
         </Stack.Navigator>
       </NavigationContainer>

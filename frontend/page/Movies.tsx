@@ -68,7 +68,7 @@ export default function Movies({
   if (error) return <Text>Error...</Text>;
   return (
     <ScrollView style={styles.container}>
-      {offset > 0 && <Button type="clear" onPress={handlePrev}><Text style={styles.button}>Load previous</Text></Button>}
+      {offset > 0 && <Button type="clear" onPress={handlePrev}><Text style={styles.button}>Previous page</Text></Button>}
       {data.moviesBySearch.map(
         ({
           title,
@@ -96,7 +96,7 @@ export default function Movies({
           );
         }
       )}
-      <Button type="clear" onPress={handlePress}><Text style={styles.button}>Load more</Text></Button>
+      <Button type="clear" onPress={handlePress}><Text style={styles.button}>Next page</Text></Button>
 
       {/* INFINITE SCROLL: BUT RELOADS WHOLE PAGE*/}
        {/* {loading ?

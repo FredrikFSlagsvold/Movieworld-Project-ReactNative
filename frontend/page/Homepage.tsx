@@ -33,14 +33,14 @@ export default function HomePage({ navigation, route }: HomePageProps) {
       <Movies text={searchText} filter={searchFilter} sort={sort} sortType={sortType} navigation={navigation} route={route} offset={offset} setOffset={setOffset}/>
 
       <View style={styles.footer}>
-        <Button onPress={() => navigation.navigate("LikedMovies")} color="#8b6363">
+        <Button onPress={() => navigation.navigate("LikedMovies")} color="#99c5f0">
           <Icon name="star" size={26} color='#fff' />
           <Text style={styles.logoutText}>Favorite Movies</Text>
         </Button>
 
     
 
-      <Button onPress={logout} title="Logout" color="#8b6363">
+      <Button onPress={logout} title="Logout" color="#99c5f0">
           <Icon name="logout" size={26} color='#fff'/>
           <Text style={styles.logoutText}>Logout</Text>
       </Button>
@@ -59,13 +59,14 @@ const styles = StyleSheet.create({
   footer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    backgroundColor: "#8b6363",
+    backgroundColor: "#99c5f0",
     padding: 15
   },
 
   logoutText:{
     fontSize: 16,
-    color: "#fff"
+    color: "#fff",
+    fontFamily: 'Verdana'
   },
 
 });
