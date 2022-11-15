@@ -15,7 +15,7 @@ export default function HomePage({ navigation, route }: HomePageProps) {
   const [searchText, setSearchText] = useState("")
   const [sort, setSort] = useState(-1)
   const [sortType, setSortType] = useState("release_date")
-  const [numberOfPages, setNumberOfPages] = useState(10)
+  const [numberOfPages, setNumberOfPages] = useState(0)
   const [offset, setOffset] = useState(0)
   
   function logout() {
@@ -26,7 +26,7 @@ export default function HomePage({ navigation, route }: HomePageProps) {
   return (
     <View style={styles.container}>
       <SearchField searchText={searchText} filter={searchFilter} setSearchFilter={setSearchFilter} setSearchText={setSearchText} setNumberOfPages={setNumberOfPages} setSortType={setSortType} setOffset={setOffset} sortType={sortType} setSort={setSort}/>
-      <Movies text={searchText} filter={searchFilter} sort={sort} sortType={sortType} navigation={navigation} route={route} offset={offset} setOffset={setOffset}/>
+      <Movies numberOfPages={numberOfPages} text={searchText} filter={searchFilter} sort={sort} sortType={sortType} navigation={navigation} route={route} offset={offset} setOffset={setOffset}/>
       
       <View style={styles.footer}>
         <Button onPress={() => navigation.navigate("LikedMovies")} color="#99c5f0">
