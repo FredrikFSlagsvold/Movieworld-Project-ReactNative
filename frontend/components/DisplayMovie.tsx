@@ -106,7 +106,7 @@ export default function DisplayMovie({ navigation, route }: DisplayMovieProps) {
               }}
             />
             <Text style={styles.header}>Similar movies</Text>
-            <View style={styles.singleContainer}>
+            <View style={styles.singleMovie}>
               {similarData?.movieListByIDs.map((data: any) => {
                 return (
                   <DisplaySingleMovie
@@ -187,5 +187,10 @@ const styles = StyleSheet.create({
   icon: {
     alignSelf: "center",
     justifyContent: "center",
+  },
+  singleMovie: {
+    flexDirection:"row",
+    flexWrap:"wrap",
+    justifyContent:"center"
   },
 });
