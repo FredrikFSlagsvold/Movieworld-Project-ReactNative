@@ -66,7 +66,6 @@ const styles = StyleSheet.create({
   logoutText:{
     fontSize: 16,
     color: "#fff",
-    fontFamily: 'Verdana'
   },
 
 });
