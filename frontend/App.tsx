@@ -24,23 +24,23 @@ export default function App() {
           <Stack.Navigator screenOptions={{ headerStyle: { backgroundColor: '#99c5f0', },  }} initialRouteName='Login'>
 
           <Stack.Screen name='HomePage'component={HomePage} options={{ title: 'M O V I E W O R L D', headerTitleStyle: {
-              color: '#fff', fontFamily: 'Verdana'
+              color: '#fff'
             },}}/>
 
           <Stack.Screen name="Login" component={Login} options={{ title: 'M O V I E W O R L D', headerTitleStyle: {
-              color: '#fff', fontFamily: 'Verdana'
+              color: '#fff'
             },}}/>
 
           <Stack.Screen name="CreateUser" component={CreateUser} options={{ title: 'M O V I E W O R L D', headerTitleStyle: {
-              color: '#fff', fontFamily: 'Verdana'
+              color: '#fff'
             },}}/>
 
           <Stack.Screen name="DisplayMovie" component={DisplayMovie} options={{ title: 'M O V I E W O R L D', headerTitleStyle: {
-              color: '#fff', fontFamily: 'Verdana'
+              color: '#fff'
             },}}/>
 
           <Stack.Screen name="LikedMovies" component={LikedMovies} options={{ title: 'Favorite movies', headerTitleStyle: {
-              color: '#fff', fontFamily: 'Verdana'
+              color: '#fff'
             },}}/>
 
         </Stack.Navigator>
