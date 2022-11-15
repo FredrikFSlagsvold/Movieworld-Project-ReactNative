@@ -19,8 +19,6 @@ export function GetLikedMovies() {
   };
   getIDValue();
 
-  console.log("id i liked movies", id);
-
   const { data } = useQuery(GET_USER, {
     variables: { id: id },
   });
@@ -32,27 +30,23 @@ export function GetLikedMovies() {
 }
 
 export default function LikedMovies({navigation, route}: any){
-
   const likedMovies =  GetLikedMovies();
-// console.log("dataaaa", likedMovies)
 
-    return (
-    <ScrollView>  
-      <Text style={styles.heading}>LIKED </Text>
-      <View style={styles.movielist}>
-       {likedMovies.map((movie: any) => <DisplayLikedMovie movieName={movie.movieName} navigation={navigation} route={route}/> )}
-      
+  return (
+    <ScrollView style={styles.liked}>  
+      <View style={styles.singleMovie}>
+       {likedMovies.map((movie: any, index) => <DisplayLikedMovie key={index} movieName={movie.movieName} navigation={navigation} route={route}/> )}
       </View>
-      </ScrollView>)
+    </ScrollView>)
 }
 
 const styles = StyleSheet.create({
-  movielist: {
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
+  singleMovie: {
+    flexDirection:"row",
+    flexWrap:"wrap",
+    justifyContent:"center"
   },
-  heading: {
-    fontSize: 20,
-  },
+  liked: {
+    backgroundColor:"white"
+  }
 });

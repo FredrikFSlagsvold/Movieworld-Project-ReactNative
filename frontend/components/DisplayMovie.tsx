@@ -5,18 +5,16 @@ import {
   View,
   Text,
   StyleSheet,
-  Platform,
   ScrollView,
   Image,
 } from "react-native";
 import WebView from "react-native-webview";
-import { useNavigate, useParams } from "react-router-dom";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../types";
 import DisplaySingleMovie from "./DisplaySingleMovie";
 import { Icon } from "@rneui/themed";
 import FavoriteButton from "./FavoriteButton";
-//import { useParams, useNavigate, Link } from "react-router-dom";
+import { DisplaySingleMovieProps } from "../page/Movies";
 
 type DisplayMovieProps = NativeStackScreenProps<
   RootStackParamList,
@@ -25,7 +23,6 @@ type DisplayMovieProps = NativeStackScreenProps<
 
 export default function DisplayMovie({ navigation, route }: DisplayMovieProps) {
   const { id } = route.params;
-
   const { loading, error, data } = useQuery(GET_MOVIE, {
     variables: { id: id },
   });
@@ -64,7 +61,6 @@ export default function DisplayMovie({ navigation, route }: DisplayMovieProps) {
             {data.movieByID.release_date.substring(0, 4)}
           </Text>
           <Text style={styles.icon}>
-            {/* {data.movieByID.vote_average}  */}
             <Icon name="star" size={16} />
             <Text>{data.movieByID.vote_average}</Text>
           </Text>
@@ -76,14 +72,14 @@ export default function DisplayMovie({ navigation, route }: DisplayMovieProps) {
           <View>
             <Text style={styles.header}>Directors</Text>
             <Text style={styles.text}>
-              {data.movieByID.directors.map((d: any) => {
-                return <Text key={d.id}>{d.name + "\n"}</Text>;
+              {data.movieByID.directors.map((d: any, index: number) => {
+                return <Text key={index}>{d.name + "\n"}</Text>;
               })}
             </Text>
             <Text style={styles.header}>Cast</Text>
             <Text style={styles.text}>
-              {data.movieByID.cast.map((a: any) => {
-                return <Text key={a.id}>{a.name + "\n"}</Text>;
+              {data.movieByID.cast.map((a: any, index:any) => {
+                return <Text key={index}>{a.name + "\n"}</Text>;
               })}
             </Text>
             <Text style={styles.header}>Description</Text>
@@ -91,8 +87,8 @@ export default function DisplayMovie({ navigation, route }: DisplayMovieProps) {
             <Text>{"\n"}</Text>
             <Text style={styles.header}>Categories</Text>
             <Text style={styles.text}>
-              {data.movieByID.genres.map((c: any) => {
-                return <Text key={c.id}>{c + "\n"}</Text>;
+              {data.movieByID.genres.map((c: any, index: any) => {
+                return <Text key={index}>{c + "\n"}</Text>;
               })}
             </Text>
             <Text style={styles.header}>Trailer</Text>
@@ -107,19 +103,28 @@ export default function DisplayMovie({ navigation, route }: DisplayMovieProps) {
             />
             <Text style={styles.header}>Similar movies</Text>
             <View style={styles.singleMovie}>
-              {similarData?.movieListByIDs.map((data: any) => {
+              {similarData?.movieListByIDs.map( 
+                ({
+                  title,
+                  genres,
+                  poster_path,
+                  runtime,
+                  id,
+                  vote_average,
+                  release_date,
+                }: DisplaySingleMovieProps) => {
                 return (
                   <DisplaySingleMovie
-                    key={data.id}
+                  key={id}
                     navigation={navigation}
-                    poster_path={data.poster_path}
-                    title={data.title}
-                    runtime={data.runtime}
-                    genres={data.genres}
-                    vote_average={data.vote_average}
-                    release_date={data.release_date}
-                    id={data.id}
-                    route={data.route}
+                    poster_path={poster_path}
+                    title={title}
+                    runtime={runtime}
+                    genres={genres}
+                    vote_average={vote_average}
+                    release_date={release_date}
+                    id={id}
+                    route={route}
                   />
                 );
               })}
@@ -135,30 +140,26 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
-    marginHorizontal: 10,
+    paddingHorizontal: 15,
     backgroundColor: "white",
   },
   details: {
     alignItems: "stretch",
-    flexDirection: "column",
+    flexDirection: "row",
     justifyContent: "space-between",
     margin: 10,
-  },
-  greeting: {
-    fontSize: 20,
-    fontWeight: "bold",
-    margin: 16,
   },
   title: {
     fontSize: 30,
     fontWeight: "bold",
     alignSelf: "center",
+    color: "#093663",
   },
   header: {
-    fontSize: 30,
+    fontSize: 25,
     fontWeight: "bold",
     color: "#093663",
-    alignSelf: "center",
+    alignSelf: "flex-start",
   },
   video: {
     margin: 10,
@@ -169,23 +170,16 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 15,
-    alignSelf: "center",
-    textAlign: "center",
+    alignSelf: "flex-start",
   },
   image: {
     alignSelf: "center",
-    width: "80%",
-    height: 400,
+    width: "95%",
+    height: 430,
     borderRadius: 20,
   },
-  singleContainer: {
-    fontSize: 12,
-    margin: 0,
-    cursor: "pointer",
-    width: 250,
-  },
   icon: {
-    alignSelf: "center",
+    alignSelf: "flex-start",
     justifyContent: "center",
   },
   singleMovie: {

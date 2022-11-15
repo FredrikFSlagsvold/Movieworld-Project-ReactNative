@@ -1,10 +1,9 @@
 import { useMutation } from "@apollo/client";
-import { IconButton, useRadioGroup } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { View, Text, StyleSheet } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Button } from "@rneui/base";
-import { addFavoriteMutation, removeFavoriteMutation } from "../utils/Queries";
+import { addFavoriteMutation, GET_USER, removeFavoriteMutation } from "../utils/Queries";
 import { GetLikedMovies } from "./LikedMovies";
 import { Icon } from "@rneui/themed";
 
@@ -33,7 +32,7 @@ export default function FavoriteButton({ movieTitle }: FavoriteButtonProps) {
       const userid = await AsyncStorage.getItem("userID");
       userid && setId(userid);
     } catch (e) {
-      console.log(e);
+      console.log(e)
     }
   };
   getIDValue();
@@ -47,15 +46,16 @@ export default function FavoriteButton({ movieTitle }: FavoriteButtonProps) {
     }
   }, [likedMovies, movieTitle]);
 
-  console.log("id i fav button", id);
   const [addMovie] = useMutation<{ user: UserProps }>(addFavoriteMutation, {
     variables: { id: id, movieName: movieTitle },
+    refetchQueries: [GET_USER],
   });
 
   const [removeMovie] = useMutation<{ user: UserProps }>(
     removeFavoriteMutation,
     {
       variables: { id: id, movieName: movieTitle },
+      refetchQueries: [GET_USER],
     }
   );
 
@@ -91,8 +91,5 @@ const styles = StyleSheet.create({
     marginHorizontal: 10,
     backgroundColor: "white",
     alignContent: "flex-start",
-  },
-  button: {
-    color: "secondary",
-  },
+  }
 });
