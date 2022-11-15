@@ -86,6 +86,7 @@ export default function SearchField({setSearchFilter,
 
 
   const updateSearch = (search: string) => {
+    setOffset(prev => prev * 0)
     setSearch(search);
   };
   

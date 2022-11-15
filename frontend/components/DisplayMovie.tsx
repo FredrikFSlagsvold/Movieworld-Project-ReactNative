@@ -111,7 +111,7 @@ export default function DisplayMovie({ navigation, route }: DisplayMovieProps) {
                 return (
                   <DisplaySingleMovie
                     key={data.id}
-                    navigation={data.navigation}
+                    navigation={navigation}
                     poster_path={data.poster_path}
                     title={data.title}
                     runtime={data.runtime}

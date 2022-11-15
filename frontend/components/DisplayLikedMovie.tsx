@@ -23,7 +23,7 @@ type DisplaySingleMovieProps ={
     release_date: String
 }
 
-type HomePageProps = NativeStackScreenProps<RootStackParamList, "HomePage">;
+type HomePageProps = NativeStackScreenProps<RootStackParamList, "DisplayMovie">;
 
 export default function DisplayLikedMovie({movieName}: DisplayLikedMovieProps,
     { navigation, route }: HomePageProps){

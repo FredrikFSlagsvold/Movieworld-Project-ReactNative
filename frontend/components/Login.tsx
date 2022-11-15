@@ -15,12 +15,14 @@ import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../types';
 import React from "react";
 
+
 type LoginProps = NativeStackScreenProps<RootStackParamList, 'Login'>
 
 const Login = ({navigation} : LoginProps)  => {
     const [userName, setUserName] = useState('');
     const [password, setPassword] = useState(''); 
     const [isWrongUser, setIsWrongUser] = useState(false)
+    const [errorMessage, setErrorMessage] = useState("")
 
   const {data} = useQuery(LOGIN_MUTATION, {
     variables: {
@@ -34,8 +36,10 @@ const Login = ({navigation} : LoginProps)  => {
         AsyncStorage.setItem("isLoggedIn", "true")
         AsyncStorage.setItem("userID", data.login[0].id) 
         navigation.replace("HomePage");
+        setErrorMessage("")
       }else{
         AsyncStorage.setItem("isLoggedIn", "false")
+        setErrorMessage("Wrong username or password")
         setIsWrongUser(true)
       }
   }
@@ -62,11 +66,13 @@ const Login = ({navigation} : LoginProps)  => {
               onChangeText={(password) => setPassword(password)}
             />
             </View>
+            {errorMessage && <View><TextInput style={styles.errorMessage}>{errorMessage}</TextInput></View> }
+                    {(userName === "" || password === "") && <View><TextInput>All fields must be filled</TextInput></View>}
           <TouchableOpacity disabled={userName === "" || password === ""} onPress={checkUser} style={styles.loginBtn}>
             <Text style={styles.TextInputBtn}>Login</Text>
           </TouchableOpacity>
           <TouchableOpacity onPress={() => navigation.replace('CreateUser')}>
-            <Text style={styles.forgot_button}>Go to register page</Text>
+            <Text style={styles.toRegister}>Go to register page</Text>
           </TouchableOpacity>
           </KeyboardAvoidingView>
       )
@@ -82,6 +88,10 @@ const styles = StyleSheet.create({
  
   image: {
     marginBottom: 40,
+  },
+
+  errorMessage: {
+    color: "red", 
   },
  
   inputView: {
@@ -108,7 +118,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
   },
  
-  forgot_button: {
+  toRegister: {
     height: 30,
     margin: 20,
     fontSize: 15,

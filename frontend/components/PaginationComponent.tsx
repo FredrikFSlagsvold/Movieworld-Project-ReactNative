@@ -1,6 +1,5 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
-import Pagination,{Icon,Dot} from 'react-native-pagination';
 
 
 type movieProps ={
@@ -18,7 +17,6 @@ export default function PaginationComponent( { moviesPerPage,pages, setOffset }:
 
     return (<View> 
 
-        {/* <Pagination count={pages || 0} onChange={(handleChange)} siblingCount={2} style={styles.container}/> */}
     </View>
     )
 }
