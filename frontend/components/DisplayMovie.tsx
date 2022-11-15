@@ -157,7 +157,7 @@ const styles = StyleSheet.create({
   header: {
     fontSize: 30,
     fontWeight: "bold",
-    color: "#8b6363",
+    color: "#093663",
     alignSelf: "center",
   },
   video: {
