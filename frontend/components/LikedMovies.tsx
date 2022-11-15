@@ -1,10 +1,10 @@
-import { useQuery } from "@apollo/client";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import { __Field } from "graphql";
-import React, { useEffect, useState } from "react";
-import { StyleSheet, Text, View } from "react-native";
-import { GET_USER } from "../utils/Queries";
-import DisplayLikedMovie from "./DisplayLikedMovie";
+import { useQuery } from '@apollo/client';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { __Field } from 'graphql';
+import React, { useEffect, useState } from 'react';
+import {ScrollView, StyleSheet, Text, View } from 'react-native';
+import { GET_USER } from '../utils/Queries';
+import DisplayLikedMovie from './DisplayLikedMovie';
 
 export function GetLikedMovies() {
   const [likedMovies, setLikedMovies] = useState([]);
@@ -31,19 +31,19 @@ export function GetLikedMovies() {
   return likedMovies;
 }
 
-export default function LikedMovies() {
-  const likedMovies = GetLikedMovies();
+export default function LikedMovies({navigation, route}: any){
 
-  return (
-    <View>
+  const likedMovies =  GetLikedMovies();
+// console.log("dataaaa", likedMovies)
+
+    return (
+    <ScrollView>  
       <Text style={styles.heading}>LIKED </Text>
       <View style={styles.movielist}>
-        {likedMovies.map((movie: any) => (
-          <DisplayLikedMovie movieName={movie.movieName} />
-        ))}
+       {likedMovies.map((movie: any) => <DisplayLikedMovie movieName={movie.movieName} navigation={navigation} route={route}/> )}
+      
       </View>
-    </View>
-  );
+      </ScrollView>)
 }
 
 const styles = StyleSheet.create({

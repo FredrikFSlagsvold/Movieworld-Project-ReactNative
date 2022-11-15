@@ -23,7 +23,7 @@ export default function App() {
     <ApolloProvider client={client}>
       <NavigationContainer>
           <Stack.Navigator initialRouteName='Login'>
-
+            
           <Stack.Screen name='HomePage'component={HomePage}/>
 
           <Stack.Screen name="DummyPage" component={DummyPage} />

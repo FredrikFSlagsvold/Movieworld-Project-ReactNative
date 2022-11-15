@@ -5,9 +5,12 @@ import React from "react";
 import { StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
 import { RootStackParamList } from "../types";
 
+
+//I feltet der det står "DisplayMovie" | "HomePage" skriver man fra hvilken hovedkomponent (fra App.tsx) navigation opprinnelig blir sendt inn fra. DisplaySingleMovie blir brukt i både DisplayMovie og HomePage. 
+
 type DisplaySingleMovieProps = NativeStackScreenProps<
   RootStackParamList,
-  "DisplayMovie"
+  "DisplayMovie" | "HomePage"
 > & {
   poster_path: String;
   title: String;
