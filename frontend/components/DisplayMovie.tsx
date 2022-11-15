@@ -14,7 +14,8 @@ import { useNavigate, useParams } from "react-router-dom";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../types";
 import DisplaySingleMovie from "./DisplaySingleMovie";
-//import FavoriteButton from "./FavoriteButton";
+import { Icon } from "@rneui/themed";
+import FavoriteButton from "./FavoriteButton";
 //import { useParams, useNavigate, Link } from "react-router-dom";
 
 type DisplayMovieProps = NativeStackScreenProps<
@@ -48,6 +49,8 @@ export default function DisplayMovie({ navigation, route }: DisplayMovieProps) {
     <View style={styles.container}>
       <ScrollView>
         <Text style={styles.title}>{data.movieByID.title}</Text>
+        <FavoriteButton movieTitle={data.movieByID.title} />
+
         <Image
           style={styles.image}
           source={{
@@ -58,10 +61,12 @@ export default function DisplayMovie({ navigation, route }: DisplayMovieProps) {
         />
         <View style={styles.details}>
           <Text style={styles.text}>
-            {data.movieByID.vote_average} stars *CHANGE TO ICON*
-          </Text>
-          <Text style={styles.text}>
             {data.movieByID.release_date.substring(0, 4)}
+          </Text>
+          <Text style={styles.icon}>
+            {/* {data.movieByID.vote_average}  */}
+            <Icon name="star" size={16} />
+            <Text>{data.movieByID.vote_average}</Text>
           </Text>
           <Text style={styles.text}>{data.movieByID.original_language}</Text>
           <Text style={styles.text}>{data.movieByID.runtime} minutes</Text>
@@ -105,6 +110,7 @@ export default function DisplayMovie({ navigation, route }: DisplayMovieProps) {
               {similarData?.movieListByIDs.map((data: any) => {
                 return (
                   <DisplaySingleMovie
+                    key={data.id}
                     navigation={data.navigation}
                     poster_path={data.poster_path}
                     title={data.title}
@@ -146,7 +152,6 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 30,
     fontWeight: "bold",
-    marginBottom: "5%",
     alignSelf: "center",
   },
   header: {
@@ -178,5 +183,9 @@ const styles = StyleSheet.create({
     margin: 0,
     cursor: "pointer",
     width: 250,
+  },
+  icon: {
+    alignSelf: "center",
+    justifyContent: "center",
   },
 });
