@@ -46,14 +46,14 @@ export default function DisplaySingleMovie({
           }}
         />
 
-        {title.length > 24 ? (
-          <Text>{title.substring(0, 21) + "..."}</Text>
+        {title.length > 17 ? (
+          <Text>{title.substring(0, 17) + "..."}</Text>
         ) : (
           <Text>{title}</Text>
         )}
 
-        {genresString.length > 25 ? (
-          <Text>{genresString.substring(0, 23) + "..."}</Text>
+        {genresString.length > 17 ? (
+          <Text>{genresString.substring(0, 17) + "..."}</Text>
         ) : (
           <Text>{genresString}</Text>
         )}
@@ -71,9 +71,11 @@ export default function DisplaySingleMovie({
 const styles = StyleSheet.create({
   container: {
     backgroundColor: "white",
+    width:"50%",
+    padding:8,
     fontSize: 12,
-    margin: 24,
     cursor: "pointer",
+    justifyContent:"center"
   },
   movieInfo: {
     display: "flex",
@@ -86,4 +88,5 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     height: 300,
   },
+  
 });

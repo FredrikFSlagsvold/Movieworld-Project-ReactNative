@@ -38,8 +38,8 @@ export default function DisplayLikedMovie({movieName, navigation, route}: Displa
         <>
             {data && data.movieByName.map(({ title, genres, poster_path, runtime, original_language, id, vote_average, release_date }: DisplaySingleMovieProps) => { return (
                     
-                <View style={styles.container}>
-                    <DisplaySingleMovie key={id} release_date={release_date} vote_average={vote_average} poster_path={poster_path} title={title} runtime={runtime} genres={genres} navigation={navigation} route={route} id={id}/>
+                <View style={styles.singleMovie}>
+                    <DisplaySingleMovie release_date={release_date} vote_average={vote_average} poster_path={poster_path} title={title} runtime={runtime} genres={genres} navigation={navigation} route={route} id={0}/>
                 </View>
             )})}
         </>
@@ -47,6 +47,9 @@ export default function DisplayLikedMovie({movieName, navigation, route}: Displa
 }
 
 const styles = StyleSheet.create({
-    container: {
-    },
+    singleMovie: {
+        flexDirection:"row",
+        flexWrap:"wrap",
+        justifyContent:"center"
+      },
   });

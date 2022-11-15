@@ -67,36 +67,38 @@ export default function Movies({
   if (loading) return <Text>Loading...</Text>;
   if (error) return <Text>Error...</Text>;
   return (
-    <ScrollView style={styles.container}>
-      {offset > 0 && <Button type="clear" onPress={handlePrev}><Text style={styles.button}>Previous page</Text></Button>}
-      {data.moviesBySearch.map(
-        ({
-          title,
-          genres,
-          poster_path,
-          runtime,
-          original_language,
-          id,
-          vote_average,
-          release_date,
-        }: DisplaySingleMovieProps) => {
-          return (
-            <DisplaySingleMovie
-            key={id}
-              navigation={navigation}
-              route={route}
-              id={id}
-              poster_path={poster_path}
-              release_date={release_date}
-              vote_average={vote_average}
-              title={title}
-              runtime={runtime}
-              genres={genres}
-            />
-          );
-        }
-      )}
-      <Button type="clear" onPress={handlePress}><Text style={styles.button}>Next page</Text></Button>
+    <ScrollView>
+      {offset > 0 && <Button type="clear" onPress={handlePrev}><Text style={styles.button}>Load previous</Text></Button>}
+      <View style={styles.singleMovie}>
+        {data.moviesBySearch.map(
+          ({
+            title,
+            genres,
+            poster_path,
+            runtime,
+            original_language,
+            id,
+            vote_average,
+            release_date,
+          }: DisplaySingleMovieProps) => {
+            return (
+              <DisplaySingleMovie
+              key={id}
+                navigation={navigation}
+                route={route}
+                id={id}
+                poster_path={poster_path}
+                release_date={release_date}
+                vote_average={vote_average}
+                title={title}
+                runtime={runtime}
+                genres={genres}
+              />
+            );
+          }
+        )}
+      </View>
+      <Button type="clear" onPress={handlePress}><Text style={styles.button}>Load more</Text></Button>
 
       {/* INFINITE SCROLL: BUT RELOADS WHOLE PAGE*/}
        {/* {loading ?
@@ -145,53 +147,11 @@ export default function Movies({
         padding:16,
         color: "pink"
       },
-      container: {
-        flex: 1,
-        marginHorizontal: 64
+      singleMovie: {
+        flexDirection:"row",
+        flexWrap:"wrap",
+        justifyContent:"center"
       },
-      title: {
-        fontSize: 25,
-        fontWeight: '700',
-        marginVertical: 15,
-        marginHorizontal: 10
-      },
-      loading: {
-        flex: 1, 
-        alignItems: 'center',
-        justifyContent: 'center'
-      },
-      footerText: {
-        flex: 1, 
-        alignItems: 'center',
-        justifyContent: 'center',
-        marginVertical: 10
-      },
-      emptyText: {
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center'
-      }
+      
     })
-    // //TODO: REMOVE?
-    // const renderHeader = () => (
-    //   <Text style={styles.title}>MOVIEEEEEEEE</Text>
-    // )
-    
-    // //TODO: REMOVE?
-    // const renderFooter = () => (
-    //   <View style={styles.footerText}>
-    //       {loading && <ActivityIndicator />}
-    //       {data.length === 0 && <Text>No more articles at the moment</Text>}
-    //   </View>
-    // )
-    
-    // const renderEmpty = () => (
-    //   <View style={styles.emptyText}>
-    //       <Text>No Data at the moment</Text>
-    //       {/* <Button onPress={() => requestAPI()} title='Refresh'/> */}
-    //   </View>
-    // )
-    
-    // const fetchMoreData = () => {
-    //   setLimit(prev => prev+1)
-    // } 
+  
