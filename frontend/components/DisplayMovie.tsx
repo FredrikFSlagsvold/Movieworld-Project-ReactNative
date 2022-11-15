@@ -77,13 +77,13 @@ export default function DisplayMovie({ navigation, route }: DisplayMovieProps) {
             <Text style={styles.header}>Directors</Text>
             <Text style={styles.text}>
               {data.movieByID.directors.map((d: any) => {
-                return <Text>{d.name + "\n"}</Text>;
+                return <Text key={d.id}>{d.name + "\n"}</Text>;
               })}
             </Text>
             <Text style={styles.header}>Cast</Text>
             <Text style={styles.text}>
               {data.movieByID.cast.map((a: any) => {
-                return <Text>{a.name + "\n"}</Text>;
+                return <Text key={a.id}>{a.name + "\n"}</Text>;
               })}
             </Text>
             <Text style={styles.header}>Description</Text>
@@ -92,7 +92,7 @@ export default function DisplayMovie({ navigation, route }: DisplayMovieProps) {
             <Text style={styles.header}>Categories</Text>
             <Text style={styles.text}>
               {data.movieByID.genres.map((c: any) => {
-                return <Text>{c + "\n"}</Text>;
+                return <Text key={c.id}>{c + "\n"}</Text>;
               })}
             </Text>
             <Text style={styles.header}>Trailer</Text>
