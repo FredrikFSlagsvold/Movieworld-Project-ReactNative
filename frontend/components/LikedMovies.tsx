@@ -1,8 +1,7 @@
 import { useQuery } from '@apollo/client';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { __Field } from 'graphql';
 import React, { useEffect, useState } from 'react';
-import {ScrollView, StyleSheet, Text, View } from 'react-native';
+import {ScrollView, StyleSheet, View } from 'react-native';
 import { GET_USER } from '../utils/Queries';
 import DisplayLikedMovie from './DisplayLikedMovie';
 

@@ -4,9 +4,8 @@ import { MovieFeed } from "../utils/Queries";
 import { StyleSheet, Text, ScrollView, View } from "react-native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { RootStackParamList } from "../types";
-import React, { useState } from "react";
+import React from "react";
 import { Button } from "@rneui/base";
-//TODO USE AS PROPS
 import { RouteProp } from "@react-navigation/native";
 import { MOVIESPERPAGE } from "../assets/const";
 
@@ -43,7 +42,6 @@ export default function Movies({
   sortType,
   offset, 
   setOffset,
-  numberOfPages
 }: MovieProps) {
   const { loading, error, data } = useQuery(MovieFeed, {
     variables: {
@@ -77,7 +75,6 @@ export default function Movies({
             genres,
             poster_path,
             runtime,
-            original_language,
             id,
             vote_average,
             release_date,

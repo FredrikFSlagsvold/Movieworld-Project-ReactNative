@@ -1,5 +1,3 @@
-import { style } from "@mui/system";
-import { NavigationContainer } from "@react-navigation/native";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { Icon } from "@rneui/base";
 import React from "react";
