@@ -9,6 +9,7 @@ import {
   TouchableOpacity,
   KeyboardAvoidingView,
   Platform,
+  ScrollView,
 } from "react-native";
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../types';
@@ -45,50 +46,52 @@ export default function CreateUser({ navigation } : CreateUserProps) {
   behavior={Platform.OS === "ios" ? "padding" : "height"} 
   style={styles.container}
   >
-      <Text style={styles.title}>Register new user</Text>
-      <View style={styles.inputView}>
-        <TextInput 
-        style={styles.TextInput}
-        placeholder="Firstname" 
-        placeholderTextColor="#003f5c"
-        onChangeText={(firstname) => setFirstName(firstname)}              
-        />
-      </View>
-      <View style={styles.inputView}>
-        <TextInput 
-        style={styles.TextInput}
-        placeholder="Lastname" 
-        placeholderTextColor="#003f5c"
-        onChangeText={(lastname) => setLastName(lastname)}              
-        />
-      </View>
-      <View style={styles.inputView}>
-        <TextInput 
-        style={styles.TextInput}
-        placeholder="Username" 
-        placeholderTextColor="#003f5c"
-        onChangeText={(username) => setUserName(username)}              
-        />
-      </View>
-      <View style={styles.inputView}>
-        <TextInput
+    <ScrollView contentContainerStyle={styles.scrollContainer}>
+        <Text style={styles.title}>Register new user</Text>
+        <View style={styles.inputView}>
+          <TextInput 
           style={styles.TextInput}
-          placeholder="Password"
+          placeholder="Firstname" 
           placeholderTextColor="#003f5c"
-          secureTextEntry={true}
-          onChangeText={(password) => setPassword(password)}
-        />
+          onChangeText={(firstname) => setFirstName(firstname)}              
+          />
         </View>
-    {data?.userByUserName.length === 1 && <View><TextInput style={styles.errorMessage}>This username already exists</TextInput></View>}
-    {(userName === "" || password === "" || firstName === "" || lastName === "") && <View><TextInput>All fields must be filled</TextInput></View>}
+        <View style={styles.inputView}>
+          <TextInput 
+          style={styles.TextInput}
+          placeholder="Lastname" 
+          placeholderTextColor="#003f5c"
+          onChangeText={(lastname) => setLastName(lastname)}              
+          />
+        </View>
+        <View style={styles.inputView}>
+          <TextInput 
+          style={styles.TextInput}
+          placeholder="Username" 
+          placeholderTextColor="#003f5c"
+          onChangeText={(username) => setUserName(username)}              
+          />
+        </View>
+        <View style={styles.inputView}>
+          <TextInput
+            style={styles.TextInput}
+            placeholder="Password"
+            placeholderTextColor="#003f5c"
+            secureTextEntry={true}
+            onChangeText={(password) => setPassword(password)}
+          />
+          </View>
+      {data?.userByUserName.length === 1 && <View><TextInput style={styles.errorMessage}>This username already exists</TextInput></View>}
+      {(userName === "" || password === "" || firstName === "" || lastName === "") && <View><TextInput>All fields must be filled</TextInput></View>}
 
-        
-      <TouchableOpacity disabled={userName === "" || password === "" || firstName === "" || lastName === "" || data?.userByUserName.length !== 0} onPress={()=> {signup();navigation.replace('Login')}} style={styles.loginBtn}>
-        <Text style={styles.TextInputBtn}>Register new user</Text>
-      </TouchableOpacity>
-      <TouchableOpacity onPress={() => navigation.replace('Login')}>
-        <Text style={styles.toLogin}>Already have an account? Go to login page</Text>
-      </TouchableOpacity>
+          
+        <TouchableOpacity disabled={userName === "" || password === "" || firstName === "" || lastName === "" || data?.userByUserName.length !== 0} onPress={()=> {signup();navigation.replace('Login')}} style={styles.loginBtn}>
+          <Text style={styles.TextInputBtn}>Register new user</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.replace('Login')}>
+          <Text style={styles.toLogin}>Already have an account? Go to login page</Text>
+        </TouchableOpacity>
+      </ScrollView>
     </KeyboardAvoidingView>
   )
 }
@@ -96,6 +99,11 @@ export default function CreateUser({ navigation } : CreateUserProps) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: "#fff",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  scrollContainer: {
     backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center",
