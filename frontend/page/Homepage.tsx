@@ -17,6 +17,7 @@ export default function HomePage({ navigation, route }: HomePageProps) {
   const [sortType, setSortType] = useState("release_date")
   const [numberOfPages, setNumberOfPages] = useState(0)
   const [offset, setOffset] = useState(0)
+  const [shouldShow, setShouldShow] = useState(false);
   
   function logout() {
     AsyncStorage.setItem("isLoggedIn", "false");
@@ -25,7 +26,16 @@ export default function HomePage({ navigation, route }: HomePageProps) {
 
   return (
     <View style={styles.container}>
-      <SearchField searchText={searchText} filter={searchFilter} setSearchFilter={setSearchFilter} setSearchText={setSearchText} setNumberOfPages={setNumberOfPages} setSortType={setSortType} setOffset={setOffset} sortType={sortType} setSort={setSort}/>
+      
+      {
+        shouldShow ? (
+          <SearchField searchText={searchText} filter={searchFilter} setSearchFilter={setSearchFilter} setSearchText={setSearchText} setNumberOfPages={setNumberOfPages} setSortType={setSortType} setOffset={setOffset} sortType={sortType} setSort={setSort}/>
+          )
+          : null
+      }
+      <Button color={"#99c5f0"} onPress={() => setShouldShow(!shouldShow)}>{shouldShow ? "Hide" : "Search"}
+        <Icon name='search' color='#fff'/>
+      </Button>
       <Movies numberOfPages={numberOfPages} text={searchText} filter={searchFilter} sort={sort} sortType={sortType} navigation={navigation} route={route} offset={offset} setOffset={setOffset}/>
       
       <View style={styles.footer}>
@@ -59,5 +69,4 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: "#fff",
   },
-
 });
