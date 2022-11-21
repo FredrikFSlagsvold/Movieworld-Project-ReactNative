@@ -4,7 +4,7 @@ import { View, Text, StyleSheet } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Button } from "@rneui/base";
 import { addFavoriteMutation, GET_USER, removeFavoriteMutation } from "../utils/Queries";
-import { GetLikedMovies } from "./LikedMovies";
+import { useLikedMovies } from "./LikedMovies";
 import { Icon } from "@rneui/themed";
 
 type LikedMoviesProps = {
@@ -25,7 +25,7 @@ type FavoriteButtonProps = {
 
 export default function FavoriteButton({ movieTitle }: FavoriteButtonProps) {
   const [clicked, setClicked] = useState(false);
-  const likedMovies = GetLikedMovies();
+  const likedMovies = useLikedMovies();
   const [id, setId] = useState("");
   const getIDValue = async () => {
     try {

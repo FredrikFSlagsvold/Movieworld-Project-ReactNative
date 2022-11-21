@@ -1,5 +1,13 @@
 # Project4
 
+## Kjøre prosjektet
+
+    cd frontend
+    npm i
+    npm start
+
+Deretter velg hva slags simulator du vil bruke eller scan QR-koden med mobilen.
+
 ## Intro
 
 Gruppen har valgt å lage en React Native App av prosjekt 3 (http://it2810-20.idi.ntnu.no/project3/ / https://gitlab.stud.idi.ntnu.no/it2810-h22/Team-20/project3 ). I dette prosjektet er det brukt samme backend og database som i prosjekt 3 slik at en bruker kan logge inn brukeren sin både på web siden og på appen.
