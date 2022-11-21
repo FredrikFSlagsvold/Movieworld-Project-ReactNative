@@ -1,11 +1,11 @@
-import { useQuery } from '@apollo/client';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import React, { useEffect, useState } from 'react';
-import {ScrollView, StyleSheet, View } from 'react-native';
-import { GET_USER } from '../utils/Queries';
-import DisplayLikedMovie from './DisplayLikedMovie';
+import { useQuery } from "@apollo/client";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import React, { useEffect, useState } from "react";
+import { ScrollView, StyleSheet, View } from "react-native";
+import { GET_USER } from "../utils/Queries";
+import DisplayLikedMovie from "./DisplayLikedMovie";
 
-export function GetLikedMovies() {
+export function useLikedMovies() {
   const [likedMovies, setLikedMovies] = useState([]);
   const [id, setId] = useState("");
   const getIDValue = async () => {
@@ -28,24 +28,32 @@ export function GetLikedMovies() {
   return likedMovies;
 }
 
-export default function LikedMovies({navigation, route}: any){
-  const likedMovies =  GetLikedMovies();
+export default function LikedMovies({ navigation, route }: any) {
+  const likedMovies = useLikedMovies();
 
   return (
-    <ScrollView style={styles.liked}>  
+    <ScrollView style={styles.liked}>
       <View style={styles.singleMovie}>
-       {likedMovies.map((movie: any, index) => <DisplayLikedMovie key={index} movieName={movie.movieName} navigation={navigation} route={route}/> )}
+        {likedMovies.map((movie: any) => (
+          <DisplayLikedMovie
+            key={movie.movieName}
+            movieName={movie.movieName}
+            navigation={navigation}
+            route={route}
+          />
+        ))}
       </View>
-    </ScrollView>)
+    </ScrollView>
+  );
 }
 
 const styles = StyleSheet.create({
   singleMovie: {
-    flexDirection:"row",
-    flexWrap:"wrap",
-    justifyContent:"center"
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "center",
   },
   liked: {
-    backgroundColor:"white"
-  }
+    backgroundColor: "white",
+  },
 });
